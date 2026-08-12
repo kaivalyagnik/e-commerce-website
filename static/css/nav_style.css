@@ -30,9 +30,15 @@ body {
   transition: transform 0.2s ease;
 }
 
+<<<<<<< HEAD
 /* .nav-logo img:hover {
   transform: scale(1.05);
 } */
+=======
+.nav-logo img:hover {
+  transform: scale(1.05);
+}
+>>>>>>> 25350bf (lab task 3)
 
 .nav-menu {
   display: flex;
@@ -143,8 +149,12 @@ body {
 
 .welcome-banner {
   background-color: #ffffff;
+<<<<<<< HEAD
   /* border-left: 6px solid #3498db;  */
   border-color: #1a252f;
+=======
+  border-left: 6px solid #3498db; 
+>>>>>>> 25350bf (lab task 3)
   padding: 35px;
   margin-bottom: 30px;
   border-radius: 4px;
@@ -353,6 +363,7 @@ body {
   color: #c0392b; 
 }
 
+<<<<<<< HEAD
 .seller-navbar {
   display: flex;
   justify-content: space-between;
@@ -554,6 +565,8 @@ body {
 
 
 
+=======
+>>>>>>> 25350bf (lab task 3)
 
 
 

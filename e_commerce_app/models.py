@@ -9,7 +9,11 @@ class Products(models.Model):
     modified_at = models.DateField(auto_now=True)
     is_active = models.BooleanField(default=False)
     available_qty = models.IntegerField(default=0)
+<<<<<<< HEAD
     product_img = models.ImageField(upload_to='products/', blank=True, null=True)
+=======
+    product_img_url = models.CharField(max_length=300, blank=True)
+>>>>>>> 25350bf (lab task 3)
 
     def __str__(self):
         return self.product_title

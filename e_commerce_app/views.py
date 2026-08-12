@@ -2,9 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from .models import Products
+<<<<<<< HEAD
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Products
 from .forms import ProductForm
+=======
+>>>>>>> 25350bf (lab task 3)
 
 # # Create your views here.
 # def show_invoices(request):
@@ -25,8 +28,12 @@ def men_view(request):
     return render(request, 'men.html', {'products': db_products})
 
 def women_view(request):
+<<<<<<< HEAD
     db_products = Products.objects.filter(is_active=True)
     return render(request, 'women.html', {'products': db_products})
+=======
+    return render(request, 'women.html')
+>>>>>>> 25350bf (lab task 3)
 
 def hats_view(request):
     return render(request, 'hats.html')
@@ -38,6 +45,7 @@ def bags_view(request):
     return render(request, 'bags.html')
 
 def drinkware_view(request):
+<<<<<<< HEAD
     return render(request, 'drinkware.html')
 
 def seller_dashboard(request):
@@ -67,3 +75,6 @@ def seller_update_product(request, pk):
     else:
         form = ProductForm(instance=product)
     return render(request, 'seller/update_product.html', {'form': form, 'product': product})
+=======
+    return render(request, 'drinkware.html')
+>>>>>>> 25350bf (lab task 3)
