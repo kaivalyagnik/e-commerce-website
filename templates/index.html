@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to NAV Merchandise Store{% endblock %}
+
+{% block content %}
+<div class="welcome-banner">
+    <h1>Welcome to NAV Merchandise Store</h1>
+    <p>Explore our exclusive collection of apparel, accessories, stationery, and lifestyle products designed for the NAV community.</p>
+</div>
+
+<div class="main-body">
+    <h2>Featured Merchandise</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-image-box">
+                <img src="{% static 'images/phoodie.jpeg'}" alt="Premium Hoodie" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-title">NAV Official Premium Hoodie</div>
+                <div class="product-price">₹1,499</div>
+                <button class="buy-btn">View Details</button>
+            </div>
+        </div>
+
+        
+        <div class="product-card">
+            <div class="product-image-box">
+                <img src="{% static 'images/metaldrinkware.jpeg'}" alt="Metal Drinkware" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-title">Insulated Stainless Steel Flask</div>
+                <div class="product-price">₹799</div>
+                <button class="buy-btn">View Details</button>
+            </div>
+        </div>
+
+
+        <div class="product-card">
+            <div class="product-image-box">
+                <img src="" alt="Hardbound Notebook" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-title">NAV Executive Journal Notebook</div>
+                <div class="product-price">₹349</div>
+                <button class="buy-btn">View Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NAV Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/nav_style.css' %}">
+</head>
+<body>
+
+    
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/nuvlogo.png' %}" alt="NUV logo">
+            </a>
+        </div>
+
+
+        <ul class="nav-menu">
+            <li class="nav-item has-dropdown">
+                <span class="dropdown-trigger">Apparel</span>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'men' %}">Men's</a></li>
+                    <li><a href="{% url 'women' %}">Women's</a></li>
+                    <li><a href="{% url 'hats' %}">Hats</a></li>
+                    <li><a href="{% url 'accessories' %}">Accessories</a></li>
+                </ul>
+            </li>
+            <li class="nav-item has-dropdown">
+                <span class="dropdown-trigger">Lifestyle</span>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'bags' %}">Bags</a></li>
+                    <li><a href="{% url 'drinkware' %}">Drinkware</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-search">
+            <form action="#" method="GET">
+                <input type="text" name="q" placeholder="Search product...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+    <main class="page-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+    <footer class="footer">
+        <div>
+            <h3>About Us</h3>
+            <p><a href="https://nuv.ac.in" target="_self">https://nuv.ac.in</a></p>
+            <p><strong>NAVRACHANA UNIVERSITY</strong></p>
+            <p>Vasna-Bhayli Road, <br>Vadodara, Gujarat, <br>India, 391410</p>
+        </div>
+        <div class="contact-info">
+            <p><strong>Phone:</strong> +91-987-6543210</p>
+            <p><strong>Mail:</strong> <a href="mailto:nuv@nuv.ac.in">nuv@nuv.ac.in</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
