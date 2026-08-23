@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Welcome to NAV Merchandise Store{% endblock %}
 
@@ -8,12 +9,17 @@
     <p>Explore our exclusive collection of apparel, accessories, stationery, and lifestyle products designed for the NAV community.</p>
 </div>
 
+<div class="seller-access-container">
+    <a href="{% url 'seller_dashboard' %}" class="seller-portal-btn">Access Seller Dashboard</a>
+</div>
+
 <div class="main-body">
-    <h2>Featured Merchandise</h2>
+    <h2>Featured products</h2>
     <div class="product-grid">
+        
         <div class="product-card">
             <div class="product-image-box">
-                <img src="{% static 'images/phoodie.jpeg'}" alt="Premium Hoodie" class="product-img">
+                <img src="{% static 'images/phoodie.jpeg' %}" alt="Premium Hoodie" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-title">NAV Official Premium Hoodie</div>
@@ -22,10 +28,9 @@
             </div>
         </div>
 
-        
         <div class="product-card">
             <div class="product-image-box">
-                <img src="{% static 'images/metaldrinkware.jpeg'}" alt="Metal Drinkware" class="product-img">
+                <img src="{% static 'images/flask.jpeg' %}" alt="Flask" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-title">Insulated Stainless Steel Flask</div>
@@ -34,10 +39,9 @@
             </div>
         </div>
 
-
         <div class="product-card">
             <div class="product-image-box">
-                <img src="" alt="Hardbound Notebook" class="product-img">
+                <div class="no-image-placeholder">No Image Available</div>
             </div>
             <div class="product-info">
                 <div class="product-title">NAV Executive Journal Notebook</div>
@@ -45,8 +49,10 @@
                 <button class="buy-btn">View Details</button>
             </div>
         </div>
+        
     </div>
 </div>
 {% endblock %}
+
 
 

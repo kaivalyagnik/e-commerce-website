@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Women's Apparel - NAV Merchandise Store{% endblock %}
+{% block title %}Women's apparel-NAV Merchandise Store{% endblock %}
 
 {% block content %}
 <div class="welcome-banner">
-    <h1>Women's Apparel Collection</h1>
-    <p>Discover comfortable crop-tops, varsity jackets, and custom college wear engineered for women.</p>
+    <h1>Women's apparel collection</h1>
+    <p class="subtitle">Discover comfortable crop-tops, varsity jackets and custom college wear engineered dynamically from the database.</p>
 </div>
 
 <div class="main-body">
     <div class="product-grid">
+        
+        {% for product in products %}
         <div class="product-card">
-            <div class="product-image-box">Women's Oversized Tee</div>
+            <div class="product-image-box">
+                {% if product.product_img %}
+                    <img src="{{ product.product_img }}" alt="{{ product.product_title }}" class="product-img">
+                {% else %}
+                    <div class="no-image-placeholder">No Image Available</div>
+                {% endif %}
+            </div>
             <div class="product-info">
-                <div class="product-title">NAV Relaxed Fit Crop Tee</div>
-                <div class="product-price">₹599</div>
+                <div class="product-title">{{ product.product_title }}</div>
+                <div class="product-price">₹{{ product.product_price }}</div>
+                
+                <p class="product-description-text">{{ product.product_desc }}</p>
+                
+                <div class="stock-status {% if product.available_qty > 0 %}in-stock{% else %}out-of-stock{% endif %}">
+                    Stock Available: {{ product.available_qty }} units
+                </div>
                 <button class="buy-btn">Add to Cart</button>
             </div>
         </div>
-
-
-        <div class="product-card">
-            <div class="product-image-box">Women's Hoodie</div>
-            <div class="product-info">
-                <div class="product-title">Pastel Pink College Hoodie</div>
-                <div class="product-price">₹1,399</div>
-                <button class="buy-btn">Add to Cart</button>
-            </div>
+        {% empty %}
+        <div class="empty-grid-fallback">
+            <p>No items found in the database. Please add products and check 'Is active' in the Seller or Django Admin panel!</p>
         </div>
+        {% endfor %}
+
     </div>
 </div>
 {% endblock %}
+
 

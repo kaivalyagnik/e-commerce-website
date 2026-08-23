@@ -1,0 +1,37 @@
+{% extends 'seller/base_seller.html' %}
+
+{% block seller_content %}
+<div class="table-box">
+    <h2>Products Inventory Ledger</h2>
+    
+    <table class="ledger-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td style="font-weight: bold;">{{ product.product_id }}</td>
+                <td>{{ product.product_title }}</td>
+                <td class="price-text">₹{{ product.product_price }}</td>
+                <td>{{ product.available_qty }}</td>
+                <td>
+                    <a href="{% url 'seller_update_product' product.pk %}" class="update-action-btn">Update</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center; color: #7f8c8d; font-style: italic;">No records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Men's Apparel - NAV Merchandise Store{% endblock %}
+{% block title %}Men's apparel-NAV Merchandise Store{% endblock %}
 
 {% block content %}
 <div class="welcome-banner">
@@ -15,25 +15,27 @@
         {% for product in products %}
         <div class="product-card">
             <div class="product-image-box">
-                {% if product.product_img_url %}
-                    <img src="{{ product.product_img_url }}" alt="{{ product.product_title }}" class="product-img">
+                {% if product.product_img %}
+                    <img src="{{ product.product_img }}" alt="{{ product.product_title }}" class="product-img">
                 {% else %}
-                    <div style="padding: 20px; text-align: center; color: #7f8c8d;">No Image Available</div>
+                    <div class="no-image-placeholder">No image available</div>
                 {% endif %}
             </div>
             <div class="product-info">
                 <div class="product-title">{{ product.product_title }}</div>
                 <div class="product-price">₹{{ product.product_price }}</div>
-                <p style="font-size: 13px; color: #7f8c8d; margin-bottom: 12px;">{{ product.product_desc }}</p>
+                
+                <p class="product-description-text">{{ product.product_desc }}</p>
+                
                 <div class="stock-status {% if product.available_qty > 0 %}in-stock{% else %}out-of-stock{% endif %}">
-    Stock Available: {{ product.available_qty }} units
-</div>
-                <button class="buy-btn">Add to Cart</button>
+                    Stock Available: {{ product.available_qty }} units
+                </div>
+                <button class="buy-btn">Add to cart</button>
             </div>
         </div>
         {% empty %}
-        <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: white; border: 1px dashed #ccc;">
-            <p style="font-size: 18px; color: #7f8c8d;">No items found in the database. Please add products and check 'Is active' in the Django Admin panel!</p>
+        <div class="empty-grid-fallback">
+            <p>No items found in the database. Please add products and check 'Is active' in the Seller or Django Admin panel!</p>
         </div>
         {% endfor %}
 

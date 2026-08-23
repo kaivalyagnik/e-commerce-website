@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Control Center</title>
+    <link rel="stylesheet" href="{% static 'css/nav_style.css' %}">
+</head>
+<body>
+
+    <nav class="seller-navbar">
+        <div class="seller-brand">seller portal</div>
+        
+        <ul class="seller-menu">
+            <li><a href="{% url 'seller_dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'seller_products' %}">Products page</a></li>
+            <li><a href="{% url 'seller_add_product' %}">Add product</a></li>
+        </ul>
+        
+        <div>
+            <a href="{% url 'index' %}" class="switch-view-btn">User store view</a>
+        </div>
+    </nav>
+
+    <div class="seller-workspace">
+        {% block seller_content %}{% endblock %}
+    </div>
+
+</body>
+</html>
+
