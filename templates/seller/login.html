@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Portal Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/nav_style.css' %}">
+</head>
+<body class="login-body-layout">
+
+    <div class="login-container-box">
+        <h2>Seller Portal Authorization</h2>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-message-box {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'seller_login' %}">
+            {% csrf_token %}
+            <p>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-input-field" placeholder="Enter seller username" required>
+            </p>
+            <br>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-input-field" placeholder="Enter security password" required>
+            </p>
+            <button type="submit" class="buy-btn login-action-btn">Log in</button>
+        </form>
+        
+        <div class="login-footer-links">
+            <a href="{% url 'index' %}">Return to Customer Store</a>
+        </div>
+    </div>
+
+</body>
+</html>
