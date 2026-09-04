@@ -1,26 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import Products
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Products
 from .forms import ProductForm
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
-# # Create your views here.
-# def show_invoices(request):
-#     return HttpResponse("Your invoice page.")
-
-# def navigation_view(request):
-#     return render(request, 'nav.html')
-
-# class AboutPageView(TemplateView):
-#     template_name = 'nav.html'
 
 def index_view(request):
-
     return render(request, 'index.html')
 
 def men_view(request):
@@ -28,12 +16,8 @@ def men_view(request):
     return render(request, 'men.html', {'products': db_products})
 
 def women_view(request):
-
     db_products = Products.objects.filter(is_active=True)
     return render(request, 'women.html', {'products': db_products})
-
-    return render(request, 'women.html')
-
 
 def hats_view(request):
     return render(request, 'hats.html')
@@ -45,8 +29,9 @@ def bags_view(request):
     return render(request, 'bags.html')
 
 def drinkware_view(request):
-
     return render(request, 'drinkware.html')
+
+
 
 @login_required(login_url='seller_login')
 def seller_dashboard(request):
@@ -56,9 +41,11 @@ def seller_dashboard(request):
 def seller_add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        
         if form.is_valid():
             form.save()
             return redirect('seller_products')
+
     else:
         form = ProductForm()
     return render(request, 'seller/add_product.html', {'form': form})
@@ -78,9 +65,11 @@ def seller_update_product(request, pk):
             return redirect('seller_products')
     else:
         form = ProductForm(instance=product)
+    
+
     return render(request, 'seller/update_product.html', {'form': form, 'product': product})
 
-    return render(request, 'drinkware.html')
+
 
 def seller_login_view(request):
     if request.user.is_authenticated:
@@ -104,4 +93,5 @@ def seller_login_view(request):
 def seller_logout_view(request):
     logout(request)
     return redirect('seller_login')
+
 

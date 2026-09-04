@@ -2,22 +2,16 @@
 
 {% block seller_content %}
 <div class="form-box">
-    <h2>Create Product Listing</h2>
+    <h2>Add Product Listing</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         
-        {% for field in form %}
-            <p>
-                <label>{{ field.label }}</label>
-                {{ field }}
-                {% if field.errors %}
-                    <span class="field-error">{{ field.errors.as_text }}</span>
-                {% endif %}
-            </p>
-        {% endfor %}
+        {{ form.as_p }}
         
         <button type="submit" class="buy-btn">Add product</button>
     </form>
 </div>
 {% endblock %}
+
+
 
