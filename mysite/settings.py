@@ -135,3 +135,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 120
 SESSION_SAVE_EVERY_REQUEST = True
 
+AUTHENTICATION_BACKENDS = [
+    'e_commerce_app.auth_backend.SellerCustomBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+

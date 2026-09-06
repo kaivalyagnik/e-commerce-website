@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Seller Portal Login</title>
-    <link href="https://jsdelivr.net" rel="stylesheet">
+    <title>Seller Registration</title>
+    <link rel="stylesheet" href="https://jsdelivr.net">
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/nav_style.css' %}">
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center min-vh-100 m-0">
 
-    <div class="card shadow-sm border border-secondary-subtle p-4 w-100 rounded-0" style="max-width: 400px;">
-        <h3 class="text-center text-dark mb-4 border-bottom pb-2 fw-bold h4">Seller Portal Authorization</h3>
+    <div class="card shadow-sm border border-secondary-subtle p-4 w-100 rounded-0" style="max-width: 440px;">
+        <h3 class="text-center text-dark mb-4 border-bottom pb-2 fw-bold h4">Create Seller Account</h3>
         
         {% if messages %}
             {% for message in messages %}
@@ -20,7 +21,7 @@
             {% endfor %}
         {% endif %}
 
-        <form method="POST" action="{% url 'seller_login' %}">
+        <form method="POST" action="{% url 'seller_register' %}">
             {% csrf_token %}
             
             {% for field in form %}
@@ -35,18 +36,16 @@
                 </div>
             {% endfor %}
             
-            <button type="submit" class="btn btn-dark w-100 rounded-0 py-2 fw-bold text-uppercase mt-2">Log In</button>
+            <button type="submit" class="btn btn-primary btn-dark w-100 rounded-0 py-2 fw-bold text-uppercase mt-2">Register</button>
         </form>
         
-        <div class="d-flex justify-content-between mt-3 small px-1">
-            <a href="{% url 'seller_register' %}" class="text-decoration-none text-primary fw-semibold">New Seller? Register</a>
-            <a href="{% url 'seller_forgot' %}" class="text-decoration-none text-muted">Forgot Credentials</a>
+        <div class="text-center mt-3 small">
+            <a href="{% url 'seller_login' %}" class="text-decoration-none text-primary fw-semibold">Already a seller? Log in</a>
         </div>
-        <div class="text-center mt-3 pt-2 border-top small">
+        <div class="text-center mt-2 pt-2 border-top small">
             <a href="{% url 'index' %}" class="text-decoration-none text-orange fw-bold">Return to Customer Store</a>
         </div>
     </div>
 
 </body>
 </html>
-

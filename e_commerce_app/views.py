@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Products
-from .forms import ProductForm
+from .forms import ProductForm, SellerLoginForm, SellerRegistrationForm
+from django.contrib.auth.models import User
 
 
 def index_view(request):
@@ -33,27 +34,69 @@ def drinkware_view(request):
 
 
 
+def seller_register_view(request):
+    if request.user.is_authenticated:
+        return redirect('seller_dashboard')
+        
+    if request.method == 'POST':
+        form = SellerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            messages.success(request, "Registration successful! Welcome to the portal.")
+            return redirect('seller_login')
+    else:
+        form = SellerRegistrationForm()
+    return render(request, 'seller/register.html', {'form': form})
+
+
+def seller_login_view(request):
+    if request.user.is_authenticated:
+        return redirect('seller_dashboard')
+        
+    if request.method == 'POST':
+        form = SellerLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('seller_dashboard')
+            else:
+                messages.error(request, "Invalid username/email or password credentials.")
+    else:
+        form = SellerLoginForm()
+    return render(request, 'seller/login.html', {'form': form})
+
+
+def seller_logout_view(request):
+    logout(request)
+    return redirect('seller_login')
+
+
+
 @login_required(login_url='seller_login')
 def seller_dashboard(request):
     return render(request, 'seller/dashboard.html')
 
 @login_required(login_url='seller_login')
-def seller_add_product(request):
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        
-        if form.is_valid():
-            form.save()
-            return redirect('seller_products')
-
-    else:
-        form = ProductForm()
-    return render(request, 'seller/add_product.html', {'form': form})
-
-@login_required(login_url='seller_login')
 def seller_products(request):
     all_items = Products.objects.all().order_by('product_id')
     return render(request, 'seller/products_list.html', {'products': all_items})
+
+@login_required(login_url='seller_login')
+def seller_add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('seller_products')
+    else:
+        form = ProductForm()
+    return render(request, 'seller/add_product.html', {'form': form})
 
 @login_required(login_url='seller_login')
 def seller_update_product(request, pk):
@@ -65,33 +108,31 @@ def seller_update_product(request, pk):
             return redirect('seller_products')
     else:
         form = ProductForm(instance=product)
-    
-
     return render(request, 'seller/update_product.html', {'form': form, 'product': product})
 
 
 
-def seller_login_view(request):
+def seller_forgot_view(request):
     if request.user.is_authenticated:
-        return redirect('seller_dashboard') 
+        return redirect('seller_dashboard')
         
     if request.method == 'POST':
         user_name = request.POST.get('username')
-        user_pass = request.POST.get('password')
+        email_addr = request.POST.get('email')
         
-        user = authenticate(request, username=user_name, password=user_pass)
+        user_match = User.objects.filter(username__iexact=user_name, email__iexact=email_addr).first()
         
-        if user is not None:
-            login(request, user)
-            return redirect('seller_dashboard')
-        else:
-            messages.error(request, "Invalid username or password. Please try again.")
-            return redirect('seller_login')
+        if user_match:
+            user_match.set_password('NAVStore2026') 
+            user_match.save()
             
-    return render(request, 'seller/login.html')
+            messages.success(request, "Account verified! Password reset to temporary default: NAVStore2026")
+            return redirect('seller_login')
+        else:
+            messages.error(request, "No seller account found with those credentials.")
+            return redirect('seller_forgot')
+            
+    return render(request, 'seller/forgot_credentials.html')
 
-def seller_logout_view(request):
-    logout(request)
-    return redirect('seller_login')
 
 

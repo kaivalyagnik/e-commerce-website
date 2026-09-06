@@ -16,4 +16,6 @@ urlpatterns = [
     path('seller/products/update/<int:pk>/', views.seller_update_product, name='seller_update_product'),
     path('seller/login/', views.seller_login_view, name='seller_login'),
     path('seller/logout/', views.seller_logout_view, name='seller_logout'),
+    path('seller/register/', views.seller_register_view, name='seller_register'), 
+    path('seller/forgot/', views.seller_forgot_view, name='seller_forgot'), 
 ]

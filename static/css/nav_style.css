@@ -698,6 +698,51 @@ body {
   text-align: left;
 }
 
+.rounded-0, 
+.card, 
+.btn, 
+.form-control, 
+.alert {
+  border-radius: 0px !important;
+}
+
+.text-orange {
+  color: #e67e22 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.text-orange:hover {
+  color: #d35400 !important;
+  text-decoration: underline !important;
+}
+
+.text-primary {
+  transition: color 0.15s ease;
+}
+
+.text-primary:hover {
+  color: #0b5ed7 !important;
+  text-decoration: underline !important;
+}
+
+.text-danger ul, 
+.text-danger li {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.bg-light {
+  background-color: #f8f9fa !important;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+.form-control:focus {
+  border-color: #2c3e50 !important;
+  box-shadow: none !important; 
+}
+
 
 
 
